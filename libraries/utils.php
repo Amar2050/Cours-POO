@@ -21,6 +21,6 @@ function render(string $path, array $variables = []) {
 
 
 function redirect(string $url) : void {
-    header("Location:$url");
+    header("Location: $url");
     exit();
 }

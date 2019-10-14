@@ -1,6 +1,12 @@
 <?php
 require_once('libraries/database.php');
 require_once('libraries/utils.php');
+require_once('libraries/models/Article.php');
+require_once('libraries/models/Comment.php');
+
+$articleModel = new Article();
+$commentModel = new Comment();
+
 /**
  * CE FICHIER DOIT ENREGISTRER UN NOUVEAU COMMENTAIRE EST REDIRIGER SUR L'ARTICLE !
  * 
@@ -45,10 +51,7 @@ if (!$author || !$article_id || !$content) {
     die("Votre formulaire a été mal rempli !");
 }
 
-$article = findArticle($article_id);
-
-$query = $pdo->prepare('SELECT * FROM articles WHERE id = :article_id');
-$query->execute(['article_id' => $article_id]);
+$article = $articleModel->find($article_id);
 
 // Si rien n'est revenu, on fait une erreur
 if (!$article) {
@@ -56,7 +59,7 @@ if (!$article) {
 }
 
 // 3. Insertion du commentaire
-insertComment($author, $content, $article_id);
+$commentModel->insert($author, $content, $article_id);
 
 // 4. Redirection vers l'article en question :
 

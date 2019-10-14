@@ -1,6 +1,9 @@
 <?php
 require_once('libraries/database.php');
 require_once('libraries/utils.php');
+require_once('libraries/models/Article.php');
+
+$modelArticle = new Article();
 /**
  * DANS CE FICHIER, ON CHERCHE A SUPPRIMER L'ARTICLE DONT L'ID EST PASSE EN GET
  * 
@@ -14,13 +17,11 @@ require_once('libraries/utils.php');
 if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
     die("Ho ?! Tu n'as pas précisé l'id de l'article !");
 }
-
 $id = $_GET['id'];
-
 /**
  * 3. Vérification que l'article existe bel et bien
  */
-$article = findArticle($id);
+$article = $modelArticle->find($id);
 if (!$article) {
     die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
 }
@@ -28,7 +29,7 @@ if (!$article) {
 /**
  * 4. Réelle suppression de l'article
  */
-deleteArticle($id);
+$modelArticle->delete($id);
 
 /**
  * 5. Redirection vers la page d'accueil

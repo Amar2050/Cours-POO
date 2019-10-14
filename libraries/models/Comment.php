@@ -4,6 +4,7 @@ require_once('libraries/models/Model.php');
 
 class Comment extends Model {
 
+    protected $table = "comments";
     
     /**
      * Find all comments of an article 
@@ -20,28 +21,6 @@ class Comment extends Model {
         return $commentaires;
     }
     
-    /**
-     * Select one comment
-     *
-     * @param integer $id
-     * @return void
-     */
-    public function find(int $id) {
-        $query = $this->pdo->prepare('SELECT * FROM comments WHERE id = :id');
-        $query->execute(['id' => $id]);
-        $comment = $query->fetch();
-        return $comment;
-    }
-    /**
-     * Deleting one comment
-     *
-     * @param integer $id
-     * @return void
-     */
-    public function delete(int $id) :void {
-        $query = $this->pdo->prepare('DELETE FROM comments WHERE id = :id');
-        $query->execute(['id' => $id]);
-    }
     /**
      * Create a comment
      *

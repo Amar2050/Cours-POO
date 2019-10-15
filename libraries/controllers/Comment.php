@@ -45,13 +45,12 @@ class Comment extends Controller {
         if (!$article) {
             die("Ho ! L'article $article_id n'existe pas boloss !");
         }
-
         // 3. Insertion du commentaire
         $this->model->insert($author, $content, $article_id);
 
         // 4. Redirection vers l'article en question :
 
-        \Http::redirect("article.php?id=" . $article_id);
+        \Http::redirect("index.php?controller=article&task=show&id=" . $article_id);
     } 
 
     public function delete(){
@@ -79,6 +78,6 @@ class Comment extends Controller {
          * 5. Redirection vers l'article en question
          */
 
-        \Http::redirect("article.php?id=" . $article_id);
+        \Http::redirect("index.php?controller=article&task=show&id=" . $article_id);
     }
 }

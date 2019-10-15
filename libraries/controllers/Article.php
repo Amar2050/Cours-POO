@@ -82,6 +82,6 @@ class Article  extends Controller
         /**
          * 5. Redirection vers la page d'accueil
          */
-        \Http::redirect("index.php");
+        \Http::redirect('index.php');
     }
 }

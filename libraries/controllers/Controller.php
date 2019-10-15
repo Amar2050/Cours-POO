@@ -8,7 +8,7 @@ abstract class Controller {
     protected $modelName;
 
     public function __construct(){
-        
-        $this->model = new \Models\Comment();
+
+        $this->model = new \Models\Article();
     }
 }
